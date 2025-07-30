@@ -35,6 +35,10 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
 
+    // ------------------------------------------------------
+    // 🔐 DEPENDENCY INJECTION
+    // ------------------------------------------------------
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     annotationProcessor("com.google.dagger:hilt-compiler:2.48")

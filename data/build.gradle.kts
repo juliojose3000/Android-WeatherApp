@@ -32,8 +32,14 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    // ------------------------------------------------------
+    // 🌐 NETWORKING
+    // ------------------------------------------------------
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -44,6 +50,14 @@ dependencies {
 
     // Gson for JSON parsing
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // ------------------------------------------------------
+    // 🔐 DEPENDENCY INJECTION
+    // ------------------------------------------------------
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.48")
 
 
     testImplementation(libs.junit)

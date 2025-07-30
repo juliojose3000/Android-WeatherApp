@@ -1,11 +1,13 @@
 package com.loaizasoftware.domain.usecases;
 
 import java.util.concurrent.CompletableFuture;
+
+import com.loaizasoftware.domain.models.WeatherResponse;
 import com.loaizasoftware.domain.repository.WeatherRepository;
 
 import javax.inject.Inject;
 
-public class GetWeatherUseCase extends UseCase<Integer, String> {
+public class GetWeatherUseCase extends UseCase<String, WeatherResponse> {
 
     private final WeatherRepository repository;
 
@@ -15,7 +17,7 @@ public class GetWeatherUseCase extends UseCase<Integer, String> {
     }
 
     @Override
-    public CompletableFuture<String> run(Integer params) {
-        return null;
+    public CompletableFuture<WeatherResponse> run(String cityName) {
+        return repository.getWeather(cityName);
     }
 }
