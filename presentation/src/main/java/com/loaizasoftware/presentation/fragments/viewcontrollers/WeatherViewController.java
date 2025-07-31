@@ -3,7 +3,7 @@ package com.loaizasoftware.presentation.fragments.viewcontrollers;
 import android.annotation.SuppressLint;
 
 import com.loaizasoftware.domain.models.Weather;
-import com.loaizasoftware.domain.models.WeatherResponse;
+import com.loaizasoftware.domain.models.WeatherData;
 import com.loaizasoftware.presentation.databinding.FragmentWeatherBinding;
 
 public class WeatherViewController {
@@ -14,7 +14,7 @@ public class WeatherViewController {
     }
 
     @SuppressLint("SetTextI18n")
-    public void buildUI(WeatherResponse response) {
+    public void buildUI(WeatherData response) {
 
         Weather weather = response.weather.get(0);
 

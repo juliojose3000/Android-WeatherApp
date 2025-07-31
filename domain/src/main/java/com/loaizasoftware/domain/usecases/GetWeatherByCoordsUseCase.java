@@ -1,13 +1,13 @@
 package com.loaizasoftware.domain.usecases;
 
-import com.loaizasoftware.domain.models.WeatherResponse;
+import com.loaizasoftware.domain.models.WeatherData;
 import com.loaizasoftware.domain.repository.WeatherRepository;
 
 import java.util.concurrent.CompletableFuture;
 
 import javax.inject.Inject;
 
-public class GetWeatherByCoordsUseCase extends UseCase<GetWeatherByCoordsUseCase.Params, WeatherResponse> {
+public class GetWeatherByCoordsUseCase extends UseCase<GetWeatherByCoordsUseCase.Params, WeatherData> {
 
     private final WeatherRepository repository;
 
@@ -17,7 +17,7 @@ public class GetWeatherByCoordsUseCase extends UseCase<GetWeatherByCoordsUseCase
     }
 
     @Override
-    public CompletableFuture<WeatherResponse> run(Params coords) {
+    public CompletableFuture<WeatherData> run(Params coords) {
         return repository.getWeather(coords.lat, coords.lon);
     }
 

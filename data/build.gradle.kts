@@ -59,6 +59,13 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     annotationProcessor("com.google.dagger:hilt-compiler:2.48")
 
+    // ------------------------------------------------------
+    // 💾 Local Storage
+    // ------------------------------------------------------
+
+    //Room
+    implementation("androidx.room:room-runtime:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

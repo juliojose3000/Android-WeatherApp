@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.loaizasoftware.domain.models.WeatherResponse;
+import com.loaizasoftware.domain.models.WeatherData;
 import com.loaizasoftware.domain.usecases.GetWeatherByCityUseCase;
 import com.loaizasoftware.domain.usecases.GetWeatherByCoordsUseCase;
 
@@ -16,8 +16,8 @@ public class WeatherViewModel extends ViewModel {
     private final GetWeatherByCoordsUseCase getWeatherByCoordsUseCase;
 
     // LiveData for weather data
-    private final MutableLiveData<WeatherResponse> _weatherData = new MutableLiveData<>();
-    public final LiveData<WeatherResponse> weatherData = _weatherData;
+    private final MutableLiveData<WeatherData> _weatherData = new MutableLiveData<>();
+    public final LiveData<WeatherData> weatherData = _weatherData;
 
     // LiveData for loading state
     private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>(false);
@@ -109,7 +109,7 @@ public class WeatherViewModel extends ViewModel {
      * Get formatted temperature string
      */
     public String getFormattedTemperature() {
-        WeatherResponse weather = _weatherData.getValue();
+        WeatherData weather = _weatherData.getValue();
         if (weather != null && weather.main != null) {
             return Math.round(weather.main.temp) + "°C";
         }
@@ -120,7 +120,7 @@ public class WeatherViewModel extends ViewModel {
      * Get weather description
      */
     public String getWeatherDescription() {
-        WeatherResponse weather = _weatherData.getValue();
+        WeatherData weather = _weatherData.getValue();
         if (weather != null && weather.weather != null && !weather.weather.isEmpty()) {
             return weather.weather.get(0).description;
         }
@@ -131,7 +131,7 @@ public class WeatherViewModel extends ViewModel {
      * Get city name
      */
     public String getCityName() {
-        WeatherResponse weather = _weatherData.getValue();
+        WeatherData weather = _weatherData.getValue();
         if (weather != null) {
             return weather.name;
         }

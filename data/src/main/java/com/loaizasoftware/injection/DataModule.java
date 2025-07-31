@@ -1,11 +1,15 @@
 package com.loaizasoftware.injection;
 
 
+import android.content.Context;
+
+import com.loaizasoftware.data.local.database.AppDatabase;
 import com.loaizasoftware.data.network.WeatherApiService;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -54,4 +58,12 @@ public class DataModule {
     public WeatherApiService provideWeatherApiService(Retrofit retrofit) {
         return retrofit.create(WeatherApiService.class);
     }
+
+    @Provides
+    @Singleton
+    public AppDatabase provideAppLocalDatabase(@ApplicationContext Context context) {
+        return AppDatabase.getInstance(context);
+    }
+
+
 }

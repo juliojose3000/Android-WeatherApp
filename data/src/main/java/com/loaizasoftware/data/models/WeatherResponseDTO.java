@@ -6,6 +6,7 @@ import com.loaizasoftware.domain.models.Coord;
 import com.loaizasoftware.domain.models.Main;
 import com.loaizasoftware.domain.models.Sys;
 import com.loaizasoftware.domain.models.Weather;
+import com.loaizasoftware.domain.models.WeatherData;
 import com.loaizasoftware.domain.models.Wind;
 
 import java.util.List;
@@ -113,9 +114,9 @@ public class WeatherResponseDTO {
     public void setCod(int cod) { this.cod = cod; }
 
     // Utility method to convert to domain model
-    public com.loaizasoftware.domain.models.WeatherResponse toDomainModel() {
-        com.loaizasoftware.domain.models.WeatherResponse domainModel =
-                new com.loaizasoftware.domain.models.WeatherResponse();
+    public WeatherData toDomainModel() {
+        WeatherData domainModel =
+                new WeatherData();
 
         domainModel.coord = this.coord;
         domainModel.weather = this.weather;
@@ -133,4 +134,28 @@ public class WeatherResponseDTO {
 
         return domainModel;
     }
+
+    // Converts DTO to WeatherEntity for Room
+    public com.loaizasoftware.data.local.entities.WeatherEntity toEntity() {
+        com.loaizasoftware.data.local.entities.WeatherEntity entity =
+                new com.loaizasoftware.data.local.entities.WeatherEntity();
+
+        entity.coord = this.coord;
+        entity.weather = this.weather;
+        entity.base = this.base;
+        entity.main = this.main;
+        entity.visibility = this.visibility;
+        entity.wind = this.wind;
+        entity.clouds = this.clouds;
+        entity.dt = this.dt;
+        entity.sys = this.sys;
+        entity.timezone = this.timezone;
+        entity.id = this.id;
+        entity.name = this.name;
+        entity.cod = this.cod;
+
+        return entity;
+    }
+
+
 }

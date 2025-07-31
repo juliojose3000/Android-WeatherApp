@@ -2,7 +2,7 @@ package com.loaizasoftware.domain.models;
 
 import java.util.List;
 
-public class WeatherResponse {
+public class WeatherData {
     public Coord coord;
     public List<Weather> weather;
     public String base;
