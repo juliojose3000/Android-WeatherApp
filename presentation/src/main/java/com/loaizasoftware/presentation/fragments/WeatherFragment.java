@@ -37,8 +37,8 @@ public class WeatherFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if(getArguments() != null) {
-            this.latitude = getArguments().getDouble("LAT");
-            this.longitude = getArguments().getDouble("LON");
+            this.latitude = getArguments().getDouble("lat");
+            this.longitude = getArguments().getDouble("lon");
         }
 
     }

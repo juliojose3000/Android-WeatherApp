@@ -10,7 +10,7 @@ import com.loaizasoftware.data.local.entities.WeatherEntity;
 public interface WeatherDao {
 
     @Insert
-    void insertUser(WeatherEntity weatherEntity);
+    void saveWeatherData(WeatherEntity weatherEntity);
 
     @Query("DELETE FROM weather")
     void delete();

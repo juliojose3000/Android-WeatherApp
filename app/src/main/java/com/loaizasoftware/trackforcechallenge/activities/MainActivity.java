@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         Bundle bundle = new Bundle();
-        bundle.putDouble("LAT", lat);
-        bundle.putDouble("LON", lon);
+        bundle.putDouble("lat", lat);
+        bundle.putDouble("lon", lon);
 
         WeatherFragment fragment = new WeatherFragment();
         fragment.setArguments(bundle);
@@ -114,19 +114,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     5000, 10, this);
 
             // Get last known location for immediate result
-            Location lastKnownGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            /*Location lastKnownGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Location lastKnownNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
             if (lastKnownGPS != null) {
                 getCityFromLocation(lastKnownGPS);
             } else if (lastKnownNetwork != null) {
                 getCityFromLocation(lastKnownNetwork);
-            }
+            }*/
 
         } catch (SecurityException e) {
             Log.e("LocationActivity", "Security exception: " + e.getMessage());
         }
     }
+
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         getCityFromLocation(location);
 
         // Stop location updates after getting first location (optional)
-        locationManager.removeUpdates(this);
+        //locationManager.removeUpdates(this);
     }
 
     private void getCityFromLocation(Location location) {

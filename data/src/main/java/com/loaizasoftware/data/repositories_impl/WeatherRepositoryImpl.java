@@ -43,7 +43,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
                 if (response.isSuccessful() && response.body() != null) {
                     future.complete(response.body().toDomainModel());
                     CompletableFuture.runAsync(() -> {
-                        appDatabase.weatherDao().insertUser(response.body().toEntity());
+                        appDatabase.weatherDao().saveWeatherData(response.body().toEntity());
                     });
                 } else {
                     future.completeExceptionally(
@@ -77,7 +77,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
                     future.complete(response.body().toDomainModel());
                     CompletableFuture.runAsync(() -> {
                         appDatabase.weatherDao().delete(); //I delete everything to keep just the last weather information fetched
-                        appDatabase.weatherDao().insertUser(response.body().toEntity());
+                        appDatabase.weatherDao().saveWeatherData(response.body().toEntity());
                     });
                 } else {
                     future.completeExceptionally(
