@@ -31,7 +31,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
         CompletableFuture<WeatherResponse> future = new CompletableFuture<>();
 
-        Call<WeatherResponseDTO> call = apiService.getCurrentWeather("Cartago", API_KEY, UNITS);
+        Call<WeatherResponseDTO> call = apiService.getCurrentWeather(cityName, API_KEY, UNITS);
 
         call.enqueue(new Callback<>() {
 

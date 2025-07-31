@@ -2,4 +2,37 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Sunny colors -->
+    <color name="sunny_start">#FFE082</color>
+    <color name="sunny_end">#FFAB40</color>
+
+    <!-- Sunny colors -->
+    <color name="sunny_start2">#8196FF</color>
+    <color name="sunny_end2">#406AFF</color>
+
+    <!-- Cloudy colors -->
+    <color name="cloudy_start">#B0BEC5</color>
+    <color name="cloudy_end">#78909C</color>
+
+    <!-- Rainy colors -->
+    <color name="rainy_start">#546E7A</color>
+    <color name="rainy_end">#37474F</color>
+
+    <!-- Snowy colors -->
+    <color name="snowy_start">#ECEFF1</color>
+    <color name="snowy_end">#B0BEC5</color>
+
+    <!-- Stormy colors -->
+    <color name="stormy_start">#424242</color>
+    <color name="stormy_end">#212121</color>
+
+    <!-- Foggy colors -->
+    <color name="foggy_start">#CFD8DC</color>
+    <color name="foggy_end">#90A4AE</color>
+
+    <!-- Default colors -->
+    <color name="default_start">#81C784</color>
+    <color name="default_end">#4CAF50</color>
+
 </resources>

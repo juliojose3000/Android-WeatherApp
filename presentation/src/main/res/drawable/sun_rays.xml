@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Ray pointing up -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:fillAlpha="0.5"
+        android:pathData="M100,20 L110,35 L90,35 Z" />
+
+    <!-- Ray pointing down -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:fillAlpha="0.5"
+        android:pathData="M100,180 L110,165 L90,165 Z" />
+
+    <!-- Ray pointing left -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:fillAlpha="0.5"
+        android:pathData="M20,100 L35,110 L35,90 Z" />
+
+    <!-- Ray pointing right -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:fillAlpha="0.5"
+        android:pathData="M180,100 L165,110 L165,90 Z" />
+
+    <!-- Sun circle using path -->
+    <path
+        android:fillColor="#FFC107"
+        android:fillAlpha="0.7"
+        android:pathData="M100,40
+                          A60,60 0 1,1 99.99,40 Z" />
+</vector>

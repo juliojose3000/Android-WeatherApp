@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.loaizasoftware.presentation.R;
 import com.loaizasoftware.presentation.databinding.FragmentWeatherBinding;
 import com.loaizasoftware.presentation.fragments.viewcontrollers.WeatherViewController;
+import com.loaizasoftware.presentation.utils.WeatherBackgroundManager;
 import com.loaizasoftware.presentation.viewmodels.WeatherViewModel;
 
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ public class WeatherFragment extends Fragment {
 
     private FragmentWeatherBinding binding = null;
     private WeatherViewController viewController = null;
+    private WeatherBackgroundManager backgroundManager;
 
     @Inject
     public WeatherViewModel viewModel;
@@ -36,12 +38,17 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weather, container, false);
+        binding.setLifecycleOwner(this);
         viewController = new WeatherViewController(binding);
 
-        viewModel.getWeather("Cartago");
+        backgroundManager = new WeatherBackgroundManager(getContext(), binding.backgroundContainer);
+
+        viewModel.getWeather("Madrid");
 
         viewModel.weatherData.observe(getViewLifecycleOwner(), weather -> {
             viewController.buildUI(weather);
+            String condition = weather.weather.get(0).main;
+            backgroundManager.setWeatherBackground(condition);
         });
 
         //viewController.buildUI();
@@ -51,6 +58,9 @@ public class WeatherFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (backgroundManager != null) {
+            backgroundManager.stopAllAnimations();
+        }
         binding = null;
     }
 
