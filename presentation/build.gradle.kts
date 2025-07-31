@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -26,12 +27,28 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
 
+    //Modules
+    implementation(project(":domain"))
+
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    // ------------------------------------------------------
+    // 🔐 DEPENDENCY INJECTION
+    // ------------------------------------------------------
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.48")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
