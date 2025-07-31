@@ -1,4 +1,4 @@
-package com.loaizasoftware.trackforcechallenge;
+package com.loaizasoftware.weatherapp;
 
 import org.junit.Test;
 

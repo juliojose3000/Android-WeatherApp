@@ -1,4 +1,4 @@
-package com.loaizasoftware.trackforcechallenge.injection;
+package com.loaizasoftware.weatherapp.injection;
 
 
 import com.loaizasoftware.data.repositories_impl.WeatherRepositoryImpl;

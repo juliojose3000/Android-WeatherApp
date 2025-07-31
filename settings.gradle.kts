@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TrackforceChallenge"
+rootProject.name = "WeatherApp"
 include(":app")
 include(":domain")
 include(":data")

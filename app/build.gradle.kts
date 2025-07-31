@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.loaizasoftware.trackforcechallenge"
+    namespace = "com.loaizasoftware.weatherapp"
     compileSdk = 35
 
     defaultConfig {

@@ -1,4 +1,4 @@
-package com.loaizasoftware.trackforcechallenge.activities;
+package com.loaizasoftware.weatherapp.activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -29,7 +29,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.loaizasoftware.core.ui.LoaderView;
 import com.loaizasoftware.core.utils.NetworkUtils;
 import com.loaizasoftware.presentation.fragments.WeatherFragment;
-import com.loaizasoftware.trackforcechallenge.R;
+import com.loaizasoftware.weatherapp.R;
 
 import java.io.IOException;
 import java.util.List;
