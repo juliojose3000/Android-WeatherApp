@@ -55,6 +55,7 @@ public class WeatherFragment extends Fragment {
         backgroundManager = new WeatherBackgroundManager(getContext(), binding.backgroundContainer);
 
         //viewModel.getWeather("Madrid");
+
         viewModel.getWeatherByCoords(latitude, longitude);
 
         viewModel.weatherData.observe(getViewLifecycleOwner(), weather -> {

@@ -15,4 +15,7 @@ public interface WeatherDao {
     @Query("DELETE FROM weather")
     void delete();
 
+    @Query("SELECT * FROM weather LIMIT 1")
+    WeatherEntity getWeatherData();
+
 }

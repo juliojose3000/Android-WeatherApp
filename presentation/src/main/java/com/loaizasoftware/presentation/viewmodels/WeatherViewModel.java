@@ -5,14 +5,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.loaizasoftware.domain.models.WeatherData;
-import com.loaizasoftware.domain.usecases.GetWeatherByCityUseCase;
 import com.loaizasoftware.domain.usecases.GetWeatherByCoordsUseCase;
 
 import javax.inject.Inject;
 
 public class WeatherViewModel extends ViewModel {
 
-    private final GetWeatherByCityUseCase getWeatherByCityUseCase;
     private final GetWeatherByCoordsUseCase getWeatherByCoordsUseCase;
 
     // LiveData for weather data
@@ -33,33 +31,8 @@ public class WeatherViewModel extends ViewModel {
 
 
     @Inject
-    public WeatherViewModel(GetWeatherByCityUseCase getWeatherByCityUseCase, GetWeatherByCoordsUseCase getWeatherByCoordsUseCase) {
-        this.getWeatherByCityUseCase = getWeatherByCityUseCase;
+    public WeatherViewModel(GetWeatherByCoordsUseCase getWeatherByCoordsUseCase) {
         this.getWeatherByCoordsUseCase = getWeatherByCoordsUseCase;
-    }
-
-    public void getWeather(String cityName) {
-        if (cityName == null || cityName.trim().isEmpty()) {
-            _errorMessage.setValue("City name cannot be empty");
-            return;
-        }
-
-        _isLoading.setValue(true);
-        _errorMessage.setValue(null);
-        _isSuccess.setValue(false);
-
-        getWeatherByCityUseCase.run(cityName)
-                .thenAccept(weather -> {
-                    _isLoading.postValue(false);
-                    _weatherData.postValue(weather);
-                    _isSuccess.postValue(true);
-                })
-                .exceptionally(throwable -> {
-                    _isLoading.postValue(false);
-                    _isSuccess.postValue(false);
-                    _errorMessage.postValue(getErrorMessage(throwable));
-                    return null;
-                });
     }
 
     public void getWeatherByCoords(double lat, double lon) {
@@ -79,13 +52,6 @@ public class WeatherViewModel extends ViewModel {
                     _errorMessage.postValue(getErrorMessage(throwable));
                     return null;
                 });
-    }
-
-    /**
-     * Refresh current weather data
-     */
-    public void refreshWeather(String cityName) {
-        getWeather(cityName);
     }
 
     /**

@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.loaizasoftware.core.ui.LoaderView;
+import com.loaizasoftware.core.utils.NetworkUtils;
 import com.loaizasoftware.presentation.fragments.WeatherFragment;
 import com.loaizasoftware.trackforcechallenge.R;
 
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             Toast.makeText(this, "Geocoder not available", Toast.LENGTH_LONG).show();
         }
 
+        if(!NetworkUtils.isInternetAvailable(this)) {
+            Toast.makeText(this, "No internet connection! Displaying last fetched weather data", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -71,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void showLoader() {
         runOnUiThread(() -> {
             if (loader != null && !loader.isShown()) {
-                //hideKeyboard(); // Assuming you have this method in your Activity
                 ViewGroup rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
                 View loaderView = loader.showLoader(false);
                 if (loaderView != null) {
@@ -165,16 +169,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             // Also try network provider as backup
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                     5000, 10, this);
-
-            // Get last known location for immediate result
-            /*Location lastKnownGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Location lastKnownNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            if (lastKnownGPS != null) {
-                getCityFromLocation(lastKnownGPS);
-            } else if (lastKnownNetwork != null) {
-                getCityFromLocation(lastKnownNetwork);
-            }*/
 
         } catch (SecurityException e) {
             Log.e("LocationActivity", "Security exception: " + e.getMessage());

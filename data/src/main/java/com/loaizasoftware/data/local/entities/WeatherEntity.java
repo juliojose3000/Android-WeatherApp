@@ -11,6 +11,7 @@ import com.loaizasoftware.domain.models.Coord;
 import com.loaizasoftware.domain.models.Main;
 import com.loaizasoftware.domain.models.Sys;
 import com.loaizasoftware.domain.models.Weather;
+import com.loaizasoftware.domain.models.WeatherData;
 import com.loaizasoftware.domain.models.Wind;
 
 import java.util.List;
@@ -51,4 +52,23 @@ public class WeatherEntity {
     public String name;
 
     public int cod;
+
+    public WeatherData toDomainModel() {
+        WeatherData data = new WeatherData();
+        data.coord = this.coord;
+        data.weather = this.weather;
+        data.base = this.base;
+        data.main = this.main;
+        data.visibility = this.visibility;
+        data.wind = this.wind;
+        data.clouds = this.clouds;
+        data.dt = this.dt;
+        data.sys = this.sys;
+        data.timezone = this.timezone;
+        data.id = this.id;
+        data.name = this.name;
+        data.cod = this.cod;
+        return data;
+    }
+
 }
