@@ -19,7 +19,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
     private final WeatherApiService apiService;
     private static final String API_KEY = "93dc26e962f6e56f70e239e538b36285";
-    private static final String UNITS = "metric";
+    private static final String UNITS = "imperial";
 
     @Inject
     public WeatherRepositoryImpl(WeatherApiService apiService) {
