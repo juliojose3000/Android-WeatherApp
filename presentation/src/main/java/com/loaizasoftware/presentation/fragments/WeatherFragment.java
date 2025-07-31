@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.loaizasoftware.core.ui.LoaderView;
 import com.loaizasoftware.presentation.R;
 import com.loaizasoftware.presentation.databinding.FragmentWeatherBinding;
 import com.loaizasoftware.presentation.fragments.viewcontrollers.WeatherViewController;
@@ -64,6 +65,14 @@ public class WeatherFragment extends Fragment {
             }
         });
 
+        viewModel.isLoading.observe(getViewLifecycleOwner(), isLoading -> {
+            if(isLoading) {
+                LoaderView.getInstance().showLoader();
+            } else {
+                LoaderView.getInstance().dismissLoader();
+            }
+        });
+
         return binding.getRoot();
     }
 
@@ -74,6 +83,7 @@ public class WeatherFragment extends Fragment {
             backgroundManager.stopAllAnimations();
         }
         binding = null;
+        viewModel.clearData();
     }
 
 }

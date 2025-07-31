@@ -89,13 +89,6 @@ public class WeatherViewModel extends ViewModel {
     }
 
     /**
-     * Clear error message
-     */
-    public void clearError() {
-        _errorMessage.setValue(null);
-    }
-
-    /**
      * Clear all data
      */
     public void clearData() {
@@ -103,46 +96,6 @@ public class WeatherViewModel extends ViewModel {
         _errorMessage.setValue(null);
         _isLoading.setValue(false);
         _isSuccess.setValue(false);
-    }
-
-    /**
-     * Get formatted temperature string
-     */
-    public String getFormattedTemperature() {
-        WeatherData weather = _weatherData.getValue();
-        if (weather != null && weather.main != null) {
-            return Math.round(weather.main.temp) + "°C";
-        }
-        return "--°C";
-    }
-
-    /**
-     * Get weather description
-     */
-    public String getWeatherDescription() {
-        WeatherData weather = _weatherData.getValue();
-        if (weather != null && weather.weather != null && !weather.weather.isEmpty()) {
-            return weather.weather.get(0).description;
-        }
-        return "No description available";
-    }
-
-    /**
-     * Get city name
-     */
-    public String getCityName() {
-        WeatherData weather = _weatherData.getValue();
-        if (weather != null) {
-            return weather.name;
-        }
-        return "Unknown";
-    }
-
-    /**
-     * Check if weather data is available
-     */
-    public boolean hasWeatherData() {
-        return _weatherData.getValue() != null;
     }
 
     /**

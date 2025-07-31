@@ -36,6 +36,7 @@ android {
 dependencies {
 
     //Modules
+    implementation(project(":core"))
     implementation(project(":domain"))
 
     implementation(libs.appcompat)
