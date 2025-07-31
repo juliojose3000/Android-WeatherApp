@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         // Check if Geocoder is available
         if (!Geocoder.isPresent()) {
-            Toast.makeText(this, "Geocoder not available", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.geocoder_not_available), Toast.LENGTH_LONG).show();
         }
 
         if(!NetworkUtils.isInternetAvailable(this)) {
-            Toast.makeText(this, "No internet connection! Displaying last fetched weather data", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -125,15 +125,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private void showPermissionDeniedDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Permission Denied")
-                .setMessage("Location permission has been denied permanently. Please enable it in app settings.")
-                .setPositiveButton("Go to Settings", (dialog, which) -> {
+                .setTitle(getString(R.string.permission_denied_title))
+                .setMessage(getString(R.string.permission_denied_message))
+                .setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package", getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
                 })
-                .setNegativeButton("Cancel", (dialog, which) -> {
+                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
                     dialog.dismiss();
                     finish(); // or handle gracefully
                 })
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startLocationUpdates();
             } else {
-                Toast.makeText(this, "Location permission required", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.location_permission_required), Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -200,13 +200,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 navigateToWeatherFragment(latitude, longitude);
 
             } else {
-                Toast.makeText(this, "No address found for location", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.no_address_found), Toast.LENGTH_LONG).show();
                 Log.w("LocationActivity", "No addresses returned from geocoder");
             }
 
         } catch (IOException e) {
             Log.e("LocationActivity", "Geocoder IOException: " + e.getMessage());
-            Toast.makeText(this, "Error getting location address", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.error_getting_address), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e("LocationActivity", "Error in geocoding: " + e.getMessage());
         }

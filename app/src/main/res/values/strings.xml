@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Weather App</string>
+    <string name="no_internet">No internet connection. Showing the last available weather data.</string>
+    <string name="geocoder_not_available">Geocoder not available</string>
+    <string name="permission_denied_title">Permission Denied</string>
+    <string name="permission_denied_message">Location permission has been denied permanently. Please enable it in app settings.</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="location_permission_required">Location permission required</string>
+    <string name="no_address_found">No address found for location</string>
+    <string name="error_getting_address">Error getting location address</string>
 </resources>
