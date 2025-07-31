@@ -71,8 +71,8 @@ public class WeatherBackgroundManager {
     private void setSunnyBackground() {
         // Sunny gradient colors
         int[] colors = {
-                ContextCompat.getColor(context, R.color.sunny_start2),
-                ContextCompat.getColor(context, R.color.sunny_end2)
+                ContextCompat.getColor(context, R.color.sunny_start),
+                ContextCompat.getColor(context, R.color.sunny_end)
         };
         setGradientBackground(colors);
 

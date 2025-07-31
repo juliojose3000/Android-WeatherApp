@@ -16,8 +16,6 @@ public class WeatherViewController {
     @SuppressLint("SetTextI18n")
     public void buildUI(WeatherResponse response) {
 
-        if(response.weather == null || response.weather.isEmpty()) return;
-
         Weather weather = response.weather.get(0);
 
         int temp = (int) response.main.temp;

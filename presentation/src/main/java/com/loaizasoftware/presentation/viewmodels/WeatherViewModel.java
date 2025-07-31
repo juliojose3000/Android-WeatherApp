@@ -5,13 +5,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.loaizasoftware.domain.models.WeatherResponse;
-import com.loaizasoftware.domain.usecases.GetWeatherUseCase;
+import com.loaizasoftware.domain.usecases.GetWeatherByCityUseCase;
+import com.loaizasoftware.domain.usecases.GetWeatherByCoordsUseCase;
 
 import javax.inject.Inject;
 
 public class WeatherViewModel extends ViewModel {
 
-    private final GetWeatherUseCase getWeatherUseCase;
+    private final GetWeatherByCityUseCase getWeatherByCityUseCase;
+    private final GetWeatherByCoordsUseCase getWeatherByCoordsUseCase;
 
     // LiveData for weather data
     private final MutableLiveData<WeatherResponse> _weatherData = new MutableLiveData<>();
@@ -31,8 +33,9 @@ public class WeatherViewModel extends ViewModel {
 
 
     @Inject
-    public WeatherViewModel(GetWeatherUseCase getWeatherUseCase) {
-        this.getWeatherUseCase = getWeatherUseCase;
+    public WeatherViewModel(GetWeatherByCityUseCase getWeatherByCityUseCase, GetWeatherByCoordsUseCase getWeatherByCoordsUseCase) {
+        this.getWeatherByCityUseCase = getWeatherByCityUseCase;
+        this.getWeatherByCoordsUseCase = getWeatherByCoordsUseCase;
     }
 
     public void getWeather(String cityName) {
@@ -45,7 +48,26 @@ public class WeatherViewModel extends ViewModel {
         _errorMessage.setValue(null);
         _isSuccess.setValue(false);
 
-        getWeatherUseCase.run(cityName)
+        getWeatherByCityUseCase.run(cityName)
+                .thenAccept(weather -> {
+                    _isLoading.postValue(false);
+                    _weatherData.postValue(weather);
+                    _isSuccess.postValue(true);
+                })
+                .exceptionally(throwable -> {
+                    _isLoading.postValue(false);
+                    _isSuccess.postValue(false);
+                    _errorMessage.postValue(getErrorMessage(throwable));
+                    return null;
+                });
+    }
+
+    public void getWeatherByCoords(double lat, double lon) {
+        _isLoading.setValue(true);
+        _errorMessage.setValue(null);
+        _isSuccess.setValue(false);
+
+        getWeatherByCoordsUseCase.run(new GetWeatherByCoordsUseCase.Params(lat, lon))
                 .thenAccept(weather -> {
                     _isLoading.postValue(false);
                     _weatherData.postValue(weather);

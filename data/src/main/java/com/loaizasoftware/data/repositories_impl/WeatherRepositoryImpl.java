@@ -56,4 +56,35 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         return future;
     }
 
+    @Override
+    public CompletableFuture<WeatherResponse> getWeather(double lat, double lon) {
+
+        CompletableFuture<WeatherResponse> future = new CompletableFuture<>();
+
+        Call<WeatherResponseDTO> call = apiService.getCurrentWeatherByCoords(lat, lon, API_KEY, UNITS);
+
+        call.enqueue(new Callback<>() {
+
+            @Override
+            public void onResponse(Call<WeatherResponseDTO> call, Response<WeatherResponseDTO> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    future.complete(response.body().toDomainModel());
+                } else {
+                    future.completeExceptionally(
+                            new Exception("API Error: " + response.code() + " " + response.message())
+                    );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponseDTO> call, Throwable t) {
+                future.completeExceptionally(t);
+            }
+
+        });
+
+        return future;
+
+    }
+
 }

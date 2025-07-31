@@ -7,12 +7,12 @@ import com.loaizasoftware.domain.repository.WeatherRepository;
 
 import javax.inject.Inject;
 
-public class GetWeatherUseCase extends UseCase<String, WeatherResponse> {
+public class GetWeatherByCityUseCase extends UseCase<String, WeatherResponse> {
 
     private final WeatherRepository repository;
 
     @Inject
-    public GetWeatherUseCase(WeatherRepository repository) {
+    public GetWeatherByCityUseCase(WeatherRepository repository) {
         this.repository = repository;
     }
 

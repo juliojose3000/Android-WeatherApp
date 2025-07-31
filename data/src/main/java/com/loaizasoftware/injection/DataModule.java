@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class NetworkModule {
+public class DataModule {
 
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
 

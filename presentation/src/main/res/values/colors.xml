@@ -4,12 +4,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Sunny colors -->
-    <color name="sunny_start">#FFE082</color>
-    <color name="sunny_end">#FFAB40</color>
-
-    <!-- Sunny colors -->
-    <color name="sunny_start2">#8196FF</color>
-    <color name="sunny_end2">#406AFF</color>
+    <color name="sunny_start">#0D47A1</color>
+    <color name="sunny_end">#2196F3</color>
 
     <!-- Cloudy colors -->
     <color name="cloudy_start">#B0BEC5</color>

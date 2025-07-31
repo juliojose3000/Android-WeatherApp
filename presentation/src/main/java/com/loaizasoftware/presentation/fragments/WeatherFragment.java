@@ -26,32 +26,44 @@ public class WeatherFragment extends Fragment {
     private WeatherViewController viewController = null;
     private WeatherBackgroundManager backgroundManager;
 
+    private double latitude;
+    private double longitude;
+
     @Inject
     public WeatherViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getArguments() != null) {
+            this.latitude = getArguments().getDouble("LAT");
+            this.longitude = getArguments().getDouble("LON");
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weather, container, false);
         binding.setLifecycleOwner(this);
         viewController = new WeatherViewController(binding);
 
         backgroundManager = new WeatherBackgroundManager(getContext(), binding.backgroundContainer);
 
-        viewModel.getWeather("Madrid");
+        //viewModel.getWeather("Madrid");
+        viewModel.getWeatherByCoords(latitude, longitude);
 
         viewModel.weatherData.observe(getViewLifecycleOwner(), weather -> {
-            viewController.buildUI(weather);
-            String condition = weather.weather.get(0).main;
-            backgroundManager.setWeatherBackground(condition);
+            if (weather != null && weather.weather != null && !weather.weather.isEmpty()) {
+                viewController.buildUI(weather);
+                String condition = weather.weather.get(0).main;
+                backgroundManager.setWeatherBackground(condition);
+            }
         });
 
-        //viewController.buildUI();
         return binding.getRoot();
     }
 
