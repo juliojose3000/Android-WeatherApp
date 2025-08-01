@@ -20,7 +20,7 @@ public class Main {
     }
 
     public String getFormattedTempMinAndMax() {
-        return "Max "+String.format("%.0f°", temp_max) + "/ Min "+String.format("%.0f°", temp_min);
+        return "Max "+String.format("%.0f°", temp_max) + " / Min "+String.format("%.0f°", temp_min);
     }
 
     // Pressure methods - rounded to whole numbers with hPa unit
