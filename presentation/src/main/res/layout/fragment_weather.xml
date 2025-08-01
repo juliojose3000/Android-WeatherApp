@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.loaizasoftware.presentation.features.weather.WeatherViewModel" />
+    </data>
+
     <FrameLayout
         android:id="@+id/backgroundContainer"
         android:layout_width="match_parent"
@@ -35,6 +41,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="28sp"
+                    android:text="@{viewModel.weatherData.name}"
                     tools:text="New York" />
 
             </LinearLayout>
@@ -56,6 +63,7 @@
                     android:padding="0dp"
                     android:textColor="@color/white"
                     android:textSize="80sp"
+                    android:text="@{viewModel.weatherData.main.getFormattedTemp()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="75°" />
@@ -67,6 +75,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="12dp"
                     android:textColor="@color/white"
+                    android:text="@{viewModel.weatherData.main.getFormattedTempMinAndMax()}"
                     app:layout_constraintLeft_toRightOf="@id/tvTemp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Max 80° / Min 70° " />
@@ -77,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:textColor="@color/white"
+                    android:text="@{viewModel.weatherData.main.getFormattedFeelsLike()}"
                     app:layout_constraintLeft_toRightOf="@id/tvTemp"
                     app:layout_constraintTop_toBottomOf="@id/tvTempMaxMin"
                     tools:text="Feels like 72°" />
@@ -90,6 +100,7 @@
                 android:textColor="@color/white"
                 android:textSize="24.dp"
                 android:textStyle="bold"
+                android:text="@{viewModel.weatherData.weather.size() > 0 ? viewModel.weatherData.weather.get(0).main : ``}"
                 tools:text="Cloudy" />
 
             <TextView
@@ -97,35 +108,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:text="@{viewModel.weatherData.weather.size() > 0 ? viewModel.weatherData.weather.get(0).description : ``}"
                 tools:text="broken clouds" />
-
 
             <TextView
                 android:id="@+id/tvHumidity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                tools:text="Feels like 72°" />
+                android:text="@{viewModel.weatherData.main.getFormattedHumidity()}"
+                tools:text="Humidity: 65%" />
 
             <TextView
                 android:id="@+id/tvWind"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                tools:text="Feels like 72°" />
+                android:text="@{viewModel.weatherData.wind.getFormattedWindSpeed()}"
+                tools:text="Wind: 5.2 m/s" />
 
             <TextView
                 android:id="@+id/tvPressure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                tools:text="Feels like 72°" />
-
+                android:text="@{viewModel.weatherData.main.getFormattedPressure()}"
+                tools:text="Pressure: 1013 hPa" />
 
         </LinearLayout>
 
     </FrameLayout>
 
-
 </layout>
-

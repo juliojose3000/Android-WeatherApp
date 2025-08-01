@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class WeatherFragment extends Fragment {
 
     private FragmentWeatherBinding binding = null;
-    private WeatherViewController viewController = null;
     private WeatherBackgroundManager backgroundManager;
 
     private double latitude;
@@ -47,17 +46,17 @@ public class WeatherFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weather, container, false);
         binding.setLifecycleOwner(this);
-        viewController = new WeatherViewController(binding);
-
+        binding.setViewModel(viewModel);
         backgroundManager = new WeatherBackgroundManager(getContext(), binding.backgroundContainer);
-
-        //viewModel.getWeather("Madrid");
-
         viewModel.getWeatherByCoords(latitude, longitude);
+        initObservers();
+        return binding.getRoot();
+    }
+
+    private void initObservers() {
 
         viewModel.weatherData.observe(getViewLifecycleOwner(), weather -> {
             if (weather != null && weather.weather != null && !weather.weather.isEmpty()) {
-                viewController.buildUI(weather);
                 String condition = weather.weather.get(0).main;
                 backgroundManager.setWeatherBackground(condition);
             }
@@ -71,7 +70,6 @@ public class WeatherFragment extends Fragment {
             }
         });
 
-        return binding.getRoot();
     }
 
     @Override
