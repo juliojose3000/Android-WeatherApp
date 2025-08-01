@@ -3,6 +3,7 @@ package com.loaizasoftware.injection;
 
 import android.content.Context;
 
+import com.loaizasoftware.data.local.dao.WeatherDao;
 import com.loaizasoftware.data.local.database.AppDatabase;
 import com.loaizasoftware.data.network.WeatherApiService;
 
@@ -61,8 +62,8 @@ public class DataModule {
 
     @Provides
     @Singleton
-    public AppDatabase provideAppLocalDatabase(@ApplicationContext Context context) {
-        return AppDatabase.getInstance(context);
+    public WeatherDao provideWeatherDao(@ApplicationContext Context context) {
+        return AppDatabase.getInstance(context).weatherDao();
     }
 
 
