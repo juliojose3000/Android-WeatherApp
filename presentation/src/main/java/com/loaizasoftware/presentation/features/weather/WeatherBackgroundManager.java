@@ -12,6 +12,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import androidx.core.content.ContextCompat;
 
+import com.loaizasoftware.domain.models.WeatherType;
 import com.loaizasoftware.presentation.R;
 
 /**
@@ -66,22 +67,30 @@ public class WeatherBackgroundManager {
      * @param weatherCondition a string representing the current weather condition (e.g., "sunny", "rain")
      */
     public void setWeatherBackground(String weatherCondition) {
-        String condition = weatherCondition.toLowerCase();
+        WeatherType type = WeatherType.fromCondition(weatherCondition);
 
-        if (condition.contains("clear") || condition.contains("sunny")) {
-            setSunnyBackground();
-        } else if (condition.contains("clouds")) {
-            setCloudyBackground();
-        } else if (condition.contains("rain") || condition.contains("drizzle")) {
-            setRainyBackground();
-        } else if (condition.contains("snow")) {
-            setSnowyBackground();
-        } else if (condition.contains("storm") || condition.contains("thunder")) {
-            setStormyBackground();
-        } else if (condition.contains("fog") || condition.contains("mist")) {
-            setFoggyBackground();
-        } else {
-            setDefaultBackground();
+        switch (type) {
+            case SUNNY:
+                setSunnyBackground();
+                break;
+            case CLOUDY:
+                setCloudyBackground();
+                break;
+            case RAINY:
+                setRainyBackground();
+                break;
+            case SNOWY:
+                setSnowyBackground();
+                break;
+            case STORMY:
+                setStormyBackground();
+                break;
+            case FOGGY:
+                setFoggyBackground();
+                break;
+            default:
+                setDefaultBackground();
+                break;
         }
     }
 
