@@ -1,4 +1,4 @@
-package com.loaizasoftware.domain.usecases;
+package com.loaizasoftware.core.base;
 
 import java.util.concurrent.CompletableFuture;
 

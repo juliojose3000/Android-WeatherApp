@@ -7,7 +7,7 @@ import com.loaizasoftware.data.local.database.AppDatabase;
 import com.loaizasoftware.data.local.entities.WeatherEntity;
 import com.loaizasoftware.data.models.WeatherResponseDTO;
 import com.loaizasoftware.data.network.WeatherApiService;
-import com.loaizasoftware.domain.models.WeatherData;
+import com.loaizasoftware.domain.models.WeatherModel;
 import com.loaizasoftware.domain.repository.WeatherRepository;
 
 import java.util.concurrent.CompletableFuture;
@@ -41,8 +41,8 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     }
 
     @Override
-    public CompletableFuture<WeatherData> getWeather(double lat, double lon) {
-        CompletableFuture<WeatherData> future = new CompletableFuture<>();
+    public CompletableFuture<WeatherModel> getWeather(double lat, double lon) {
+        CompletableFuture<WeatherModel> future = new CompletableFuture<>();
 
         if (NetworkUtils.isInternetAvailable(context)) {
             fetchDataFromApi(lat, lon, future); // Has internet – call API
@@ -53,14 +53,14 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         return future;
     }
 
-    private void fetchDataFromApi(double lat, double lon, CompletableFuture<WeatherData> future) {
+    private void fetchDataFromApi(double lat, double lon, CompletableFuture<WeatherModel> future) {
         Call<WeatherResponseDTO> call = apiService.getCurrentWeatherByCoords(lat, lon, API_KEY, UNITS);
 
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<WeatherResponseDTO> call, Response<WeatherResponseDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    WeatherData domainData = response.body().toDomainModel();
+                    WeatherModel domainData = response.body().toDomainModel();
                     future.complete(domainData);
 
                     // Save to DB in background
@@ -82,7 +82,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         });
     }
 
-    private void fetchDataFromLocalDB(CompletableFuture<WeatherData> future) {
+    private void fetchDataFromLocalDB(CompletableFuture<WeatherModel> future) {
         CompletableFuture.runAsync(() -> {
             try {
                 WeatherEntity entity = appDatabase.weatherDao().getWeatherData();

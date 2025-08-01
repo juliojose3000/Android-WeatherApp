@@ -11,11 +11,21 @@ import com.loaizasoftware.domain.models.Coord;
 import com.loaizasoftware.domain.models.Main;
 import com.loaizasoftware.domain.models.Sys;
 import com.loaizasoftware.domain.models.Weather;
-import com.loaizasoftware.domain.models.WeatherData;
+import com.loaizasoftware.domain.models.WeatherModel;
 import com.loaizasoftware.domain.models.Wind;
 
 import java.util.List;
 
+/**
+ * Room database entity representing the weather data stored locally.
+ * <p>
+ * This entity is used to cache the latest fetched weather information from the API,
+ * allowing offline access to previously retrieved data. It maps to the "weather" table
+ * in the local database and mirrors the structure of {@link WeatherModel} from the domain layer.
+ * <p>
+ * The class uses multiple embedded objects and type converters to support complex types
+ * like lists and nested objects.
+ */
 @Entity(tableName = "weather")
 @TypeConverters({Converters.class})
 public class WeatherEntity {
@@ -53,8 +63,8 @@ public class WeatherEntity {
 
     public int cod;
 
-    public WeatherData toDomainModel() {
-        WeatherData data = new WeatherData();
+    public WeatherModel toDomainModel() {
+        WeatherModel data = new WeatherModel();
         data.coord = this.coord;
         data.weather = this.weather;
         data.base = this.base;

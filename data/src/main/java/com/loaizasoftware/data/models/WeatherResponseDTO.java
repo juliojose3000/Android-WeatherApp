@@ -6,7 +6,7 @@ import com.loaizasoftware.domain.models.Coord;
 import com.loaizasoftware.domain.models.Main;
 import com.loaizasoftware.domain.models.Sys;
 import com.loaizasoftware.domain.models.Weather;
-import com.loaizasoftware.domain.models.WeatherData;
+import com.loaizasoftware.domain.models.WeatherModel;
 import com.loaizasoftware.domain.models.Wind;
 
 import java.util.List;
@@ -135,9 +135,9 @@ public class WeatherResponseDTO {
     public void setCod(int cod) { this.cod = cod; }
 
     // Utility method to convert to domain model
-    public WeatherData toDomainModel() {
-        WeatherData domainModel =
-                new WeatherData();
+    public WeatherModel toDomainModel() {
+        WeatherModel domainModel =
+                new WeatherModel();
 
         domainModel.coord = this.coord;
         domainModel.weather = this.weather;

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.loaizasoftware.domain.models.WeatherData;
+import com.loaizasoftware.domain.models.WeatherModel;
 import com.loaizasoftware.domain.usecases.GetWeatherByCoordsUseCase;
 
 import javax.inject.Inject;
@@ -14,8 +14,8 @@ public class WeatherViewModel extends ViewModel {
     private final GetWeatherByCoordsUseCase getWeatherByCoordsUseCase;
 
     // LiveData for weather data
-    private final MutableLiveData<WeatherData> _weatherData = new MutableLiveData<>();
-    public final LiveData<WeatherData> weatherData = _weatherData;
+    private final MutableLiveData<WeatherModel> _weatherData = new MutableLiveData<>();
+    public final LiveData<WeatherModel> weatherData = _weatherData;
 
     // LiveData for loading state
     private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>(false);

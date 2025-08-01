@@ -5,5 +5,5 @@ import java.util.concurrent.CompletableFuture;
 
 public interface WeatherRepository {
     //CompletableFuture<WeatherData> getWeather(String cityName);
-    CompletableFuture<WeatherData> getWeather(double lat, double lon);
+    CompletableFuture<WeatherModel> getWeather(double lat, double lon);
 }

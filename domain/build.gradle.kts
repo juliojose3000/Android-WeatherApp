@@ -32,6 +32,10 @@ android {
 
 dependencies {
 
+    //Modules
+    implementation(project(":core"))
+
+
     implementation(libs.appcompat)
     implementation(libs.material)
 
