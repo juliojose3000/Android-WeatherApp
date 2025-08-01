@@ -1,4 +1,4 @@
-package com.loaizasoftware.presentation.fragments;
+package com.loaizasoftware.presentation.features.weather;
 
 import android.os.Bundle;
 
@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 import com.loaizasoftware.core.ui.LoaderView;
 import com.loaizasoftware.presentation.R;
 import com.loaizasoftware.presentation.databinding.FragmentWeatherBinding;
-import com.loaizasoftware.presentation.fragments.viewcontrollers.WeatherViewController;
-import com.loaizasoftware.presentation.utils.WeatherBackgroundManager;
-import com.loaizasoftware.presentation.viewmodels.WeatherViewModel;
 
 import javax.inject.Inject;
 

@@ -27,7 +27,6 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     private final AppDatabase appDatabase;
     private static final String API_KEY = "93dc26e962f6e56f70e239e538b36285";
     private static final String UNITS = "imperial";
-
     private Context context;
 
     @Inject
@@ -46,11 +45,9 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         CompletableFuture<WeatherData> future = new CompletableFuture<>();
 
         if (NetworkUtils.isInternetAvailable(context)) {
-            // Has internet – call API
-            fetchDataFromApi(lat, lon, future);
+            fetchDataFromApi(lat, lon, future); // Has internet – call API
         } else {
-            // No internet – load from Room
-            fetchDataFromLocalDB(future);
+            fetchDataFromLocalDB(future); // No internet – load from Room
         }
 
         return future;

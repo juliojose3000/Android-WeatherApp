@@ -11,6 +11,27 @@ import com.loaizasoftware.domain.models.Wind;
 
 import java.util.List;
 
+
+/**
+ * Data Transfer Object (DTO) for weather API response deserialization.
+ *
+ * This class represents the complete structure of a weather API response from OpenWeatherMap
+ * or similar weather services. It handles the mapping between JSON response fields and Java
+ * objects using Gson annotations for proper deserialization.
+ *
+ * The DTO follows the data layer responsibility in Clean Architecture, serving as an
+ * intermediary between the external API response and internal domain models. It provides
+ * conversion methods to transform API data into domain models and database entities.
+ *
+ * <p>Key features:</p>
+ * <ul>
+ *   <li>Complete mapping of weather API response fields</li>
+ *   <li>Conversion to domain model for business logic layer</li>
+ *   <li>Conversion to database entity for persistence</li>
+ *   <li>Proper JSON field mapping with @SerializedName annotations</li>
+ * </ul>
+ *
+ */
 public class WeatherResponseDTO {
     @SerializedName("coord")
     private Coord coord;

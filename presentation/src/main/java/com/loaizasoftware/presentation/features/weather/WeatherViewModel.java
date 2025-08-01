@@ -1,4 +1,4 @@
-package com.loaizasoftware.presentation.viewmodels;
+package com.loaizasoftware.presentation.features.weather;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

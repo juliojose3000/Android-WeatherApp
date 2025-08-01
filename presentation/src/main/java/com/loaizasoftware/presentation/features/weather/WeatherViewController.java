@@ -1,4 +1,4 @@
-package com.loaizasoftware.presentation.fragments.viewcontrollers;
+package com.loaizasoftware.presentation.features.weather;
 
 import android.annotation.SuppressLint;
 

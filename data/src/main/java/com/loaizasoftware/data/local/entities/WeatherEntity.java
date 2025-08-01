@@ -17,7 +17,7 @@ import com.loaizasoftware.domain.models.Wind;
 import java.util.List;
 
 @Entity(tableName = "weather")
-@TypeConverters({Converters.class}) // You'll define this class
+@TypeConverters({Converters.class})
 public class WeatherEntity {
 
     @Embedded

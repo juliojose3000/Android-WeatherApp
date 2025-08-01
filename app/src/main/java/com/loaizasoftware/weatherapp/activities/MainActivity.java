@@ -28,7 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.loaizasoftware.core.ui.LoaderView;
 import com.loaizasoftware.core.utils.NetworkUtils;
-import com.loaizasoftware.presentation.fragments.WeatherFragment;
+import com.loaizasoftware.presentation.features.weather.WeatherFragment;
 import com.loaizasoftware.weatherapp.R;
 
 import java.io.IOException;
