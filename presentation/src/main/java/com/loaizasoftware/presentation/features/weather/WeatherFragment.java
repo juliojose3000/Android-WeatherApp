@@ -2,6 +2,7 @@ package com.loaizasoftware.presentation.features.weather;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -68,6 +69,22 @@ public class WeatherFragment extends Fragment {
             } else {
                 LoaderView.getInstance().dismissLoader();
             }
+        });
+
+        viewModel.errorMessage.observe(getViewLifecycleOwner(), error -> {
+
+            if(error == null) return;
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.error_message_title)
+                    .setMessage(getString(R.string.error_message_description)+" "+error)
+                    .setCancelable(false)
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.dismiss();
+                        requireActivity().finish();
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         });
 
     }
