@@ -9,6 +9,9 @@ import com.loaizasoftware.domain.usecases.GetWeatherByCoordsUseCase;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class WeatherViewModel extends ViewModel {
 
     private final GetWeatherByCoordsUseCase getWeatherByCoordsUseCase;
@@ -94,7 +97,10 @@ public class WeatherViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        // Clean up any resources if needed
+        _weatherData.setValue(null);
+        _errorMessage.setValue(null);
+        _isLoading.setValue(false);
+        _isSuccess.setValue(false);
     }
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,6 @@ import android.view.ViewGroup;
 import com.loaizasoftware.core.ui.LoaderView;
 import com.loaizasoftware.presentation.R;
 import com.loaizasoftware.presentation.databinding.FragmentWeatherBinding;
-
-import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -27,12 +26,14 @@ public class WeatherFragment extends Fragment {
     private double latitude;
     private double longitude;
 
-    @Inject
     public WeatherViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Scope ViewModel to Activity so it survives rotation
+        viewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
 
         if(getArguments() != null) {
             this.latitude = getArguments().getDouble("lat");
@@ -49,8 +50,12 @@ public class WeatherFragment extends Fragment {
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
         backgroundManager = new WeatherBackgroundManager(getContext(), binding.backgroundContainer);
-        viewModel.getWeatherByCoords(latitude, longitude);
+
+        if(viewModel.weatherData.getValue() == null) {
+            viewModel.getWeatherByCoords(latitude, longitude);
+        }
         initObservers();
+
         return binding.getRoot();
     }
 
@@ -96,7 +101,7 @@ public class WeatherFragment extends Fragment {
             backgroundManager.stopAllAnimations();
         }
         binding = null;
-        viewModel.clearData();
+        //viewModel.clearData();
     }
 
 }
