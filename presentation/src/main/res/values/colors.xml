@@ -20,8 +20,8 @@
     <color name="rainy_end">#37474F</color>
 
     <!-- Snowy colors -->
-    <color name="snowy_start">#ECEFF1</color>
-    <color name="snowy_end">#B0BEC5</color>
+    <color name="snowy_start">#7EB1BA</color>
+    <color name="snowy_end">#40A5C7</color>
 
     <!-- Stormy colors -->
     <color name="stormy_start">#424242</color>

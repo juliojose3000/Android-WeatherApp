@@ -1,10 +1,14 @@
 package com.loaizasoftware.presentation.features.weather;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -14,6 +18,9 @@ import androidx.core.content.ContextCompat;
 
 import com.loaizasoftware.domain.models.WeatherType;
 import com.loaizasoftware.presentation.R;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * {@code WeatherBackgroundManager} is responsible for dynamically updating the background visuals
@@ -305,22 +312,33 @@ public class WeatherBackgroundManager {
 
     /**
      * Animates a stormy background with lightning flickers and pulsing effects.
+     * Blinks once, waits 5 seconds, then repeats.
      */
     private void startStormAnimation() {
         particleLayer.setImageResource(R.drawable.lightning_effects);
 
+        // Create the blink animation (single cycle)
         ObjectAnimator lightning = ObjectAnimator.ofFloat(particleLayer, "alpha", 0f, 1f, 0f);
-        lightning.setDuration(200);
-        lightning.setRepeatCount(ValueAnimator.INFINITE);
-        lightning.setStartDelay(2000);
+        lightning.setDuration(300);
+        lightning.setRepeatCount(0); // No repeat - single blink
 
-        ObjectAnimator backgroundPulse = ObjectAnimator.ofFloat(gradientOverlay, "alpha", 0.8f, 1f);
-        backgroundPulse.setDuration(100);
-        backgroundPulse.setRepeatCount(ValueAnimator.INFINITE);
-        backgroundPulse.setRepeatMode(ValueAnimator.REVERSE);
+        ObjectAnimator backgroundPulse = ObjectAnimator.ofFloat(gradientOverlay, "alpha", 1f, 0.8f, 1f);
+        backgroundPulse.setDuration(300);
+        backgroundPulse.setRepeatCount(0); // No repeat - single pulse
 
+        // Create the animation set for one cycle
         AnimatorSet stormSet = new AnimatorSet();
         stormSet.playTogether(lightning, backgroundPulse);
+
+        // Add listener to restart after 5 seconds
+        stormSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // Wait 5 seconds then restart
+                particleLayer.postDelayed(() -> startStormAnimation(), 5000);
+            }
+        });
+
         stormSet.start();
     }
 
