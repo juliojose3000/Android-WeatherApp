@@ -28,4 +28,17 @@ public enum WeatherType {
             return DEFAULT;
         }
     }
+
+    // This returns the word like "cloudy" instead of enum name
+    public String toDisplayString() {
+        switch (this) {
+            case SUNNY: return "Sunny";
+            case CLOUDY: return "Cloudy";
+            case RAINY: return "Rainy";
+            case SNOWY: return "Snowy";
+            case STORMY: return "Stormy";
+            case FOGGY: return "Foggy";
+            default: return "Unknown";
+        }
+    }
 }
