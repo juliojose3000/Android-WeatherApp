@@ -2,6 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent_white">#A5FFFFFF</color>
+    <color name="transparent_white_65">#A5FFFFFF</color>
+    <color name="transparent_white_80">#32FFFFFF</color>
+    <color name="red">#FF0000</color>
 
     <!-- Sunny colors -->
     <color name="sunny_start">#0D47A1</color>

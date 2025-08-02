@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.loaizasoftware.presentation.features.weather.WeatherViewModel" />
@@ -39,9 +40,9 @@
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{viewModel.weatherData.name}"
                     android:textColor="@color/white"
                     android:textSize="28sp"
-                    android:text="@{viewModel.weatherData.name}"
                     tools:text="New York" />
 
             </LinearLayout>
@@ -61,9 +62,9 @@
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:padding="0dp"
+                    android:text="@{viewModel.weatherData.main.getFormattedTemp()}"
                     android:textColor="@color/white"
                     android:textSize="80sp"
-                    android:text="@{viewModel.weatherData.main.getFormattedTemp()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="75°" />
@@ -74,8 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="12dp"
-                    android:textColor="@color/white"
                     android:text="@{viewModel.weatherData.main.getFormattedTempMinAndMax()}"
+                    android:textColor="@color/white"
                     app:layout_constraintLeft_toRightOf="@id/tvTemp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Max 80° / Min 70° " />
@@ -85,54 +86,53 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:textColor="@color/white"
                     android:text="@{viewModel.weatherData.main.getFormattedFeelsLike()}"
+                    android:textColor="@color/white"
                     app:layout_constraintLeft_toRightOf="@id/tvTemp"
                     app:layout_constraintTop_toBottomOf="@id/tvTempMaxMin"
                     tools:text="Feels like 72°" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- tvWeatherMain remains without a CardView -->
             <TextView
                 android:id="@+id/tvWeatherMain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="24.dp"
-                android:textStyle="bold"
+                style="@style/WeatherMainTextStyle"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@{viewModel.weatherData.weather.size() > 0 ? viewModel.weatherData.weather.get(0).main : ``}"
                 tools:text="Cloudy" />
 
             <TextView
                 android:id="@+id/tvWeatherDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                style="@style/WeatherTextViewStyle"
+                android:layout_marginVertical="8dp"
                 android:text="@{viewModel.weatherData.weather.size() > 0 ? viewModel.weatherData.weather.get(0).description : ``}"
+                android:visibility="gone"
                 tools:text="broken clouds" />
 
             <TextView
                 android:id="@+id/tvHumidity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                style="@style/WeatherTextViewStyle"
+                android:layout_marginVertical="8dp"
                 android:text="@{viewModel.weatherData.main.getFormattedHumidity()}"
+                android:drawableEnd="@drawable/humidity"
                 tools:text="Humidity: 65%" />
 
             <TextView
                 android:id="@+id/tvWind"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                style="@style/WeatherTextViewStyle"
+                android:layout_marginVertical="8dp"
                 android:text="@{viewModel.weatherData.wind.getFormattedWindSpeed()}"
+                android:drawableEnd="@drawable/wind"
                 tools:text="Wind: 5.2 m/s" />
 
             <TextView
                 android:id="@+id/tvPressure"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                style="@style/WeatherTextViewStyle"
+                android:layout_marginVertical="8dp"
                 android:text="@{viewModel.weatherData.main.getFormattedPressure()}"
+                android:drawableEnd="@drawable/pressure"
                 tools:text="Pressure: 1013 hPa" />
 
         </LinearLayout>
