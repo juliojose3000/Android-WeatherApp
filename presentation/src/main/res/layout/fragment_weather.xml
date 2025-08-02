@@ -135,6 +135,14 @@
                 android:drawableEnd="@drawable/pressure"
                 tools:text="Pressure: 1013 hPa" />
 
+            <TextView
+                android:id="@+id/tvSunset"
+                style="@style/WeatherTextViewStyle"
+                android:layout_marginVertical="8dp"
+                android:text="@{viewModel.weatherData.sys.sunsetTime}"
+                android:drawableEnd="@drawable/sunset"
+                tools:text="Sunset: 5:15 pm" />
+
         </LinearLayout>
 
     </FrameLayout>
