@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private LocationManager locationManager;
     private Geocoder geocoder;
     private LoaderView loader;
+    private boolean isRequestingLocationUpdates = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void startLocationUpdates() {
+
+        if(isRequestingLocationUpdates) return; //If the location permission was provided, is not required to ask again again for them
+
         try {
             showLoader();
 
@@ -169,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             // Also try network provider as backup
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                     5000, 10, this);
+
+            isRequestingLocationUpdates = true;
 
         } catch (SecurityException e) {
             Log.e("LocationActivity", "Security exception: " + e.getMessage());
