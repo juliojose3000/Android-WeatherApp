@@ -89,7 +89,25 @@ The application requires the following permissions:
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## 📸 Screenshots
-[Add screenshots here]
+
+#Cloudy
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/29954c8b-0952-4f03-8bdc-b0cb39c37118" />
+
+#Sunny
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/df7aa42d-421c-488c-bd5d-4f504f788a37" />
+
+#Rainy
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/cc8494cc-206d-4bb0-9688-3915adb24b67" />
+
+#Snowy
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/b112f36e-0e72-4ed9-b2c0-ea8b3cedd0de" />
+
+#Stormy
+![Screen_recording_20250801_220649-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/c5bb4002-a8e7-415d-9ccc-2956b172a1b5)
+
+#Foggy
+<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/7ffffcf8-297d-42bb-89e4-c6cc2b4762cd" />
+
 
 ---
 
