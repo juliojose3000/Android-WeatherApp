@@ -20,7 +20,6 @@ WeatherApp is a modern Android application that provides real-time weather infor
 - **Language**: Java
 - **Architecture**: Clean Architecture (Domain, Data, Presentation layers)
 - **Dependency Injection**: Hilt
-- **Navigation**: AndroidX Navigation
 - **Data Binding**: Android Data Binding
 - **Network**: Internet connectivity handling
 - **Location Services**: Android Location API
@@ -95,7 +94,7 @@ The application requires the following permissions:
 ## 🏛️ Design Patterns Used
 
 ### Architectural
-- **MVVM**: To separate the logic from the view and locate it in a viewmodel
+- **MVVM**: To separate the logic from view
 
 ### Behavioral
 - **Use Case**: to encapsulate business logic as a single action
@@ -115,9 +114,6 @@ The application requires the following permissions:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## 📸 Screenshots
 
