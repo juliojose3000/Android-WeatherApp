@@ -80,14 +80,9 @@ public class LoaderView {
 
     private static LoaderView loaderView;
 
-    public static synchronized LoaderView createInstance(Context context) {
-        if (loaderView == null) {
-            loaderView = new LoaderView(context);
-        }
-        return loaderView;
-    }
 
-    public static synchronized LoaderView getInstance() {
+    public static synchronized LoaderView getInstance(Context context) {
+        if(loaderView == null) loaderView = new LoaderView(context);
         return loaderView;
     }
 }

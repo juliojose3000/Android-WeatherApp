@@ -4,21 +4,20 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.loaizasoftware.core.ui.LoaderView;
+import com.loaizasoftware.core.base.BaseFragment;
 import com.loaizasoftware.presentation.R;
 import com.loaizasoftware.presentation.databinding.FragmentWeatherBinding;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class WeatherFragment extends Fragment {
+public class WeatherFragment extends BaseFragment {
 
     private FragmentWeatherBinding binding = null;
     private WeatherBackgroundManager backgroundManager;
@@ -70,9 +69,9 @@ public class WeatherFragment extends Fragment {
 
         viewModel.isLoading.observe(getViewLifecycleOwner(), isLoading -> {
             if(isLoading) {
-                LoaderView.getInstance().showLoader();
+                showLoader();
             } else {
-                LoaderView.getInstance().dismissLoader();
+                dismissLoader();
             }
         });
 

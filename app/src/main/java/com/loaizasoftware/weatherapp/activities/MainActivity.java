@@ -25,7 +25,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.loaizasoftware.core.base.BaseActivity;
+import com.loaizasoftware.core.ext.DistinctObserver;
 import com.loaizasoftware.core.ui.LoaderView;
 import com.loaizasoftware.core.utils.NetworkUtils;
 import com.loaizasoftware.presentation.features.weather.WeatherFragment;
@@ -38,13 +41,12 @@ import java.util.Locale;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends BaseActivity implements LocationListener {
 
     private static final int LOCATION_PERMISSION_REQUEST = 1001;
     private LocationManager locationManager;
     private Geocoder geocoder;
-    private LoaderView loader;
-    private boolean isRequestingLocationUpdates = false;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        loader = LoaderView.createInstance(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         geocoder = new Geocoder(this, Locale.getDefault());
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Check if Geocoder is available
         if (!Geocoder.isPresent()) {
@@ -65,25 +67,34 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
+        initObservers();
+
+
+    }
+
+    private void initObservers() {
+
+        viewModel.location.observe(this, new DistinctObserver<>() {
+            @Override
+            public void onNewValue(Location location) {
+                getCityFromLocation(location);
+            }
+        });
+
+        viewModel.showLoader.observe(this, showLoader -> {
+            if(showLoader) {
+                showLoader();
+            } else {
+                dismissLoader();
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         requestLocationPermission();
-    }
-
-    // Inside your Activity class
-    public void showLoader() {
-        runOnUiThread(() -> {
-            if (loader != null && !loader.isShown()) {
-                ViewGroup rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
-                View loaderView = loader.showLoader(false);
-                if (loaderView != null) {
-                    rootView.addView(loaderView);
-                }
-            }
-        });
     }
 
     private void navigateToWeatherFragment(double lat, double lon) {
@@ -159,10 +170,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private void startLocationUpdates() {
 
-        if(isRequestingLocationUpdates) return; //If the location permission was provided, is not required to ask again again for them
+        //If the location permission was provided, is not required to ask again again for them
+        if(Boolean.TRUE.equals(viewModel.isLocationPermissionEnabled.getValue())) return;
 
         try {
-            showLoader();
+
+            viewModel.showLoader.setValue(true);
 
             // Request location updates
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -174,11 +187,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                     5000, 10, this);
 
-            isRequestingLocationUpdates = true;
+            viewModel.isLocationPermissionEnabled.setValue(true);
 
         } catch (SecurityException e) {
             Log.e("LocationActivity", "Security exception: " + e.getMessage());
         }
+
     }
 
 
@@ -187,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Log.d("LocationActivity", "Location changed: " + location.getLatitude() +
                 ", " + location.getLongitude());
 
-        getCityFromLocation(location);
+        viewModel.setLocation(location);
 
         // Stop location updates after getting first location (optional)
         //locationManager.removeUpdates(this);
